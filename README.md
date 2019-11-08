@@ -46,18 +46,12 @@ The app will look like this:
 > here only one box is shown, obviously you will work with a variable list of movies.
 
 # Usage
-
-> Fill this with your instructions on how to run your app.
-
+inside the folder
 ```bash
-# IT MUST RUN VIA DOCKER
-# example 1
-docker run -it -p 8080:8080 your-image/love-my-movies:1.20
-
-# example 2
+docker-compose build
 docker-compose up
-
 ```
+it will run in localhost:5000
 
 # The Movie Database API
 We are going to use The Movie Database API 3 [TMDd](https://www.themoviedb.org/) to retrieve our initial data.
@@ -103,16 +97,16 @@ Which gave me [trending_movies.json](trending_movies.json)
 
 # Not Extras, but required (MUST)
 
-- [ ] Use Flask as backend (for now)
-- [ ] Use Redis as the counter DB (incr/decr vote_count)
-- [ ] Use Redis to store any details or additional info for the movies (JSON respond)
-- [ ] Use Redis as a cache.
+- [x] Use Flask as backend (for now)
+- [x] Use Redis as the counter DB (incr/decr vote_count)
+- [x] Use Redis to store any details or additional info for the movies (JSON respond)
+- [x] Use Redis as a cache.
 - [ ] CI/CD (you can use GithubActions (beta) / Gitlab CI /Travis/ Circle CI)
 - [ ] Dockerfile with a valid docker build & push to a valid Docker Hub repository.
-- [ ] A good html/css layout of your own.
-- [ ] Modularize everything with files and functions.
-- [ ] Use javascript to "Click and show more details of the movie"
-- [ ] IT WILL NOT RUN under python, but Docker, you must provide under the [README's Usage](#usage) how to run it using Docker commands
+- [x] A good html/css layout of your own.
+- [x] Modularize everything with files and functions.
+- [x] Use javascript to "Click and show more details of the movie"
+- [x] IT WILL NOT RUN under python, but Docker, you must provide under the [README's Usage](#usage) how to run it using Docker commands
 
 
 

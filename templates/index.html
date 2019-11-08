@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LoveMovies</title>
+    
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+      
+      button {
+          border: none;
+          background-color: transparent;
+          outline: none;
+      }
+      button:focus {
+          border: none;
+      }
+
+      body{
+        background: rgb(64,59,147);
+        background: -moz-linear-gradient(270deg, rgba(64,59,147,1) 0%, rgba(102,96,214,1) 35%, rgba(0,212,255,1) 100%);
+        background: -webkit-linear-gradient(278deg, rgba(64,59,147,1) 0%, rgba(102,96,214,1) 35%, rgba(0,212,255,1) 100%);
+        background: linear-gradient(270deg, rgba(64,59,147,1) 0%, rgba(102,96,214,1) 35%, rgba(0,212,255,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#403b93",endColorstr="#00d4ff",GradientType=1);   
+        background-attachment: fixed;
+        background-size:cover;
+      }
+      .extras{
+        display: none;
+      }
+      .slides > div {
+        margin: 17px;
+      }
+
+      .card{
+      width: 400px;
+      height: 300px;
+      max-width: 800px;
+      font-size: 10px;
+      }
+      .card-title{
+        font-size: 20px;
+      }
+      .col-sm-3{
+        margin: auto;
+      }
+      
+      @media only screen and (min-width: 500px) {
+      .slides {
+        display: flex;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+    }
+      </style>
+  </head>
+<body>
+  <div class="slider">
+    <h1>Trending</h1>
+    <div class="slides">
+      {% for info in  trending['results'] %}
+      <div id="slide-1">
+        <div class = "card text-white bg-dark mb-3" >
+            <div class="card-body row">
+                <div class = "col-sm-3">
+                    <div class="Upvote"><form method='POST' action=upvote><button type="submit" name='vote' value={{ info['id'] }}>
+                        <img src= "/static/arrow.png" style="width: 100%; 
+                        -webkit-transform: rotate(-90deg);
+                        -moz-transform: rotate(-90deg);
+                        -o-transform: rotate(-90deg);
+                        -ms-transform: rotate(-90deg);
+                        transform: rotate(-90deg);">
+                      </button></form></div>
+                    <div class="votescount" style="font-size: 20px; text-align: center;">{{server.get(info["id"])}} </div>
+                    <div class="Downvote"><form method='POST' action=downvote><button type="submit" name='vote' value={{ info['id'] }}><img src= "/static/arrow.png" style="width: 100%; 
+                      text-align: center; 
+                      -webkit-transform: rotate(90deg);
+                      -moz-transform: rotate(90deg);
+                      -o-transform: rotate(90deg);
+                      -ms-transform: rotate(90deg);
+                      transform: rotate(90deg);"></button></form></div>
+                </div>
+                <div class = "col-sm-9">
+                  <div class="float-left"><img src="https://image.tmdb.org/t/p/w500/{{info['poster_path']}}" style="width: 120px;"/></div>
+                  <h5 class="card-title">{{info["title"]}}</h5>
+                  <p class="card-text"><small class="text-muted">
+                      Original title: 
+                      {{info['original_title']}}
+                    </small></p>
+                  <p class="card-text" style = "max-height: 70px; overflow: auto; " id = "overview{{loop.index}}">{{info["overview"]}}</p>
+                  <P class="card-text" >
+                      <span id="more{{loop.index}}" style="display: none;">
+                        Homepage: {{info["homepage"]}}<br>
+                        release date: {{info["release_date"]}}</span></p>
+                  <button onclick="hideTrending('{{loop.index}}')" id="BtnTrending{{loop.index}}" style = "color: grey;">Read more</button>
+                </div>
+              
+            </div>
+        </div>
+      </div>
+      {% endfor %}
+      </div>
+    </div>
+  
+    <div class="slider">
+      <h1>Discover</h1>
+        <div class="slides">
+          {% for info in  discover['results'] %}
+          <div id="slide-1">
+            <div class = "card text-white bg-dark mb-3" >
+                <div class="card-body row">
+                    <div class = "col-sm-3">
+                        <div class="Upvote"><form method='POST' action=upvote><button type="submit" name='vote' value={{ info['id'] }}>
+                            <img src= "/static/arrow.png" style="width: 100%; 
+                            -webkit-transform: rotate(-90deg);
+                            -moz-transform: rotate(-90deg);
+                            -o-transform: rotate(-90deg);
+                            -ms-transform: rotate(-90deg);
+                            transform: rotate(-90deg);">
+                          </button></form></div>
+                        <div class="votescount" style="font-size: 20px; text-align: center;">{{server.get(info["id"])}} </div>
+                        <div class="Downvote"><form method='POST' action=downvote><button type="submit" name='vote' value={{ info['id'] }}><img src= "/static/arrow.png" style="width: 100%; 
+                          text-align: center; 
+                          -webkit-transform: rotate(90deg);
+                          -moz-transform: rotate(90deg);
+                          -o-transform: rotate(90deg);
+                          -ms-transform: rotate(90deg);
+                          transform: rotate(90deg);"></button></form></div>
+                    </div>
+                    <div class = "col-sm-9">
+                      <div class="float-left"><img src="https://image.tmdb.org/t/p/w500/{{info['poster_path']}}" style="width: 120px;"/></div>
+                      <h5 class="card-title">{{info["title"]}}</h5>
+                      <p class="card-text"><small class="text-muted">
+                          Original title: 
+                          {{info['original_title']}}
+                        </small></p>
+                      <p class="card-text" style = "max-height: 70px; overflow: hidden; " id = "overview{{loop.index}}">{{info["overview"]}}</p>
+                      <P class="card-text" >
+                          <span id="discovermore{{loop.index}}" style="display: none;">
+                            Homepage: {{info["homepage"]}}<br>
+                            release date: {{info["release_date"]}}</span></p>
+                      <button onclick="hideDiscover('{{loop.index}}')" id="BtnDiscover{{loop.index}}" style = "color: grey;">Read more</button>
+                    </div>
+                  
+                </div>
+            </div>
+          </div>
+          {% endfor %}
+          </div>
+        </div>
+    <script>
+            function hideDiscover(num) {
+              var moreText = document.getElementById("discovermore" + num);
+              var btnText = document.getElementById("BtnDiscover" + num);
+            
+              if (btnText.innerHTML == "Read less") {
+                btnText.innerHTML = "Read more"; 
+                moreText.style.display = "none";
+              } else {
+                btnText.innerHTML = "Read less"; 
+                moreText.style.display = "inline";
+              }
+            }
+            function hideTrending(num) {
+              var moreText = document.getElementById("more" + num);
+              var btnText = document.getElementById("BtnTrending" + num);
+            
+              if (btnText.innerHTML == "Read less") {
+                btnText.innerHTML = "Read more"; 
+                moreText.style.display = "none";
+              } else {
+                btnText.innerHTML = "Read less"; 
+                moreText.style.display = "inline";
+              }
+            }
+            function hidetext(clas,i,discover) {
+            if (discover=='yes'){
+              i+=7;
+            }
+            var x = document.getElementsByClassName(clas)[i];
+            if (x.style.display === "block") {
+              x.style.display = "none";
+            } else {
+              x.style.display = "block";
+            }
+          }
+    </script>
+</body>
+</html>

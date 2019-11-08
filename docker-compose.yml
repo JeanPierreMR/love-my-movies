@@ -1,0 +1,11 @@
+web:
+  build: .
+  command: python renderer.py
+  ports:
+   - "5000:5000"
+  volumes:
+   - .:/code
+  links:
+   - redis
+redis:
+  image: redis

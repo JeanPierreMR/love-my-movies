@@ -1,0 +1,27 @@
+body{
+    background: rgb(64,59,147);
+    background: -moz-linear-gradient(270deg, rgba(64,59,147,1) 0%, rgba(102,96,214,1) 35%, rgba(0,212,255,1) 100%);
+    background: -webkit-linear-gradient(278deg, rgba(64,59,147,1) 0%, rgba(102,96,214,1) 35%, rgba(0,212,255,1) 100%);
+    background: linear-gradient(270deg, rgba(64,59,147,1) 0%, rgba(102,96,214,1) 35%, rgba(0,212,255,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#403b93",endColorstr="#00d4ff",GradientType=1);   
+    background-attachment: fixed;
+    background-size:cover;
+
+}
+
+.card{
+    max-width: 800px;
+    min-width: 400px;
+    margin: auto;
+    overflow: auto;
+    height: 500px;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+button:focus {
+    border: none;
+}
